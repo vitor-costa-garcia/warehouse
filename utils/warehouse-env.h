@@ -35,19 +35,30 @@ typedef struct{
 
 typedef struct{
     int* warehouse;
-    int width;
-    int height;
+    unsigned int width;
+    unsigned int height;
     Robot robots[MAX_ROBOTS];
-    int robotCounter;
+    unsigned int robotCounter;
 } Warehouse; //Warehouse map
 
-void createWarehouse(Warehouse* wh, int width, int height){};
-int getWhIndex(){};
-int* getWarehousePos(Warehouse* wh, int x, int y){};
-void addPickupStation(Warehouse* wh, int x, int y){};
-void addDropStation(Warehouse* wh, int x, int y){};
-void addRobot(Warehouse* wh, int x, int y){};
-void addRechargeStation(Warehouse* wh, int x, int y){};
-void addObstacle(Warehouse wh, int x, int y){};
+typedef struct Step Step;
+
+struct Step{
+    unsigned int robotID;
+    RobotState state;
+    RobotState next_state;
+    unsigned int action;
+    float reward;
+    Step* next;
+};
+
+void createWarehouse(Warehouse* wh, int width, int height);
+int getWhIndex();
+int* getWarehousePos(Warehouse* wh, int x, int y);
+void addPickupStation(Warehouse* wh, int x, int y);
+void addDropStation(Warehouse* wh, int x, int y);
+void addRobot(Warehouse* wh, int x, int y);
+void addRechargeStation(Warehouse* wh, int x, int y);
+void addObstacle(Warehouse* wh, int x, int y);
 
 #endif
